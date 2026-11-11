@@ -17,3 +17,6 @@ COPY docker/perl/testers /yaml/bin/
 ENV PATH="/yaml/bin:$PATH"
 
 ENV RUNTIME=perl
+# Install YAML::PP into the local/ directory
+cpanm -l local --notest YAML::PP
+export PERL5LIB=$PWD/local/lib/perl5
