@@ -17,6 +17,7 @@ jobs:
       run: lein deps
     - name: Run tests
       run: lein test
+      make build
 # Start all containers
 yamlrun-docker-start
 # Only start alpine-runtime-perl container
