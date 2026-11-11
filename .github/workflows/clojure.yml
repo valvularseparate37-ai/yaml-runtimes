@@ -1,0 +1,36 @@
+name: Clojure CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: lein deps
+    - name: Run tests
+      run: lein test
+# Start all containers
+yamlrun-docker-start
+# Only start alpine-runtime-perl container
+yamlrun-docker-start perl
+
+# Test
+make testv
+
+# Stop all containers
+yamlrun-docker-stop
+# Only stop alpine-runtime-perl container
+yamlrun-docker-stop perl
+
+# List containers
+yamlrun-docker-status
+# Restart all
+yamlrun-docker-restart
